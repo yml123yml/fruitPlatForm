@@ -54,7 +54,6 @@
       width="30%"
       :before-close="handleClose"
     >
-        <input type=""
         
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false"

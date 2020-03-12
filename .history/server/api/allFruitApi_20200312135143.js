@@ -34,11 +34,7 @@ router.post('/list', (req, res) => {
 
 // 删除
 router.get('/delete', (req, res) => {
-  // var sql = $sql.allFruit.delete
-  const id = req.body.id
-  const sql = `delete from allFruit where id = '${id}`
-  console.log(sql)
-  console.log(id)
+  var sql = $sql.allFruit.delete
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)

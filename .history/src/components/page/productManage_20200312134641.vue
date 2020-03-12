@@ -7,7 +7,6 @@
         >
       </el-breadcrumb>
     </div>
-    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
     <el-table
       :data="
         tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
@@ -48,46 +47,31 @@
       :total="tableData.length"
     >
     </el-pagination>
-    <el-dialog
-      title="添加"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose"
-    >
-        <input type=""
-        
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "productManage",
-  data() {
+  name: 'productManage',
+  data () {
     return {
       tableData: [],
-      search: "",
+      search: '',
       currentPage: 1,
-      pagesize: 5,
-      dialogVisible: false
-    };
+      pagesize: 5
+    }
   },
   methods: {
-    getList() {
-      axios.post("/api/allFruit/list").then(res => {
-        this.tableData = res.data;
-      });
+    getList () {
+      axios.post('/api/allFruit/list').then(res => {
+        this.tableData = res.data
+      })
     },
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit (index, row) {
+      console.log(index, row)
     },
-    //根据id删除用户
+    	//根据id删除用户
     // async handleDelete(id){
     //     console.log(id);
     //     this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
@@ -107,33 +91,26 @@ export default {
     //       message: err
     //     })
     //   })
-    // },
+    // }, 
     handleDelete(id) {
-      axios.get("/api/allFruit/delete?id=" + id).then(res => {
-        console.log("dddd");
-        console.log(id);
-        console.log(res.data);
-        this.getList();
-      });
+      axios.get('/api/allFruit/delete?id='+id).then(res=>{
+        console.log('dddd')
+        console.log(id)
+        console.log(res.data)
+        this.getList()
+      })
     },
-    handleSizeChange(val) {
-      this.pagesize = val;
+    handleSizeChange (val) {
+      this.pagesize = val
     },
-    handleCurrentChange(val) {
-      this.currentPage = val;
-    },
-         handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
+    handleCurrentChange (val) {
+      this.currentPage = val
+    }
   },
-  created() {
-    this.getList();
+  created () {
+    this.getList()
   }
-};
+}
 </script>
 
 <style>

@@ -7,7 +7,6 @@
         >
       </el-breadcrumb>
     </div>
-    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
     <el-table
       :data="
         tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
@@ -54,8 +53,8 @@
       width="30%"
       :before-close="handleClose"
     >
-        <input type=""
-        
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false"
           >确 定</el-button
@@ -79,6 +78,14 @@ export default {
     };
   },
   methods: {
+     handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      }
+    },
     getList() {
       axios.post("/api/allFruit/list").then(res => {
         this.tableData = res.data;
@@ -121,14 +128,7 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-    },
-         handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
+    }
   },
   created() {
     this.getList();
