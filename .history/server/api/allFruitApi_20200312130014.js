@@ -20,8 +20,8 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-router.post('/selectPro', (req, res) => {
-  var sql = $sql.tuijian.selectPro
+router.post('/list', (req, res) => {
+  var sql = $sql.allFruit.query
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)
@@ -32,8 +32,9 @@ router.post('/selectPro', (req, res) => {
   })
 })
 
-router.post('/heavyPro', (req, res) => {
-  var sql = $sql.tuijian.heavyPro
+// 删除
+router.delete('/delete', (req, res) => {
+  var sql = $sql.allFruit.delete
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)
@@ -44,4 +45,18 @@ router.post('/heavyPro', (req, res) => {
   })
 })
 
+// router.post('/delete', (req, res) => {
+//   var sql = $sql.allFruit.delete
+//   // var params = req.body;
+//   console.log(req)
+//   conn.query(sql, [req.body.id], function (_err, result) {
+//     var data = result
+//     console.log(result)
+//     return res.send({
+//       status: 1,
+//       msg: '删除成功',
+//       data: data
+//     })
+//   })
+// })
 module.exports = router

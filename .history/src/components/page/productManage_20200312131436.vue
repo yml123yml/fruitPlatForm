@@ -79,7 +79,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
+        axios.post('/api/allFruit/delete?id'+id)
         this.$message({
           type: 'success',
           message: '删除成功!',

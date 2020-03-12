@@ -71,6 +71,7 @@ export default {
     handleEdit (index, row) {
       console.log(index, row)
     },
+    handleDelete(id) {
     	//根据id删除用户
     async handleDelete(id){
         console.log(id);
@@ -79,7 +80,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
+        axios.delete('/api/allFruit/delete?id'+id)
         this.$message({
           type: 'success',
           message: '删除成功!',

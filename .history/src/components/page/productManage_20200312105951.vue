@@ -1,0 +1,70 @@
+<template>
+  <div class="">
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item
+          ><i class="el-icon-lx-copy"></i> 商品管理</el-breadcrumb-item
+        >
+      </el-breadcrumb>
+    </div>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column label="编号" prop="id"> </el-table-column>
+      <el-table-column label="图片" prop="pic"> </el-table-column>
+      <el-table-column label="标题" prop="title"> </el-table-column>
+      <el-table-column label="描述" prop="desc"> </el-table-column>
+      <el-table-column label="标签分类" prop="tip"> </el-table-column>
+      <el-table-column label="价格" prop="price"> </el-table-column>
+      <el-table-column label="编辑">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            >编辑</el-button
+          >
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+            >删除</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'tabs',
+  data () {
+    return {
+      tableData: [],
+      search: ''
+    }
+  },
+  mounted () {
+    
+  },
+  methods: {
+    getList () {
+axios.post('/api/allFruit/list').then(res => {
+      console.log(res.data)
+    })
+    },
+    handleEdit (index, row) {
+      console.log(index, row)
+    },
+    handleDelete (index, row) {
+      console.log(index, row)
+    }
+  }
+}
+</script>
+
+<style>
+.message-title {
+  cursor: pointer;
+}
+.handle-row {
+  margin-top: 30px;
+}
+</style>

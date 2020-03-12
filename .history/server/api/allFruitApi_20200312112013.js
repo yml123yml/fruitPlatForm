@@ -20,8 +20,8 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-router.post('/allBanner', (req, res) => {
-  var sql = $sql.banner.allBanner
+router.post('/list', (req, res) => {
+  var sql = $sql.allFruit.query
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)
@@ -32,4 +32,15 @@ router.post('/allBanner', (req, res) => {
   })
 })
 
+router.post('/delete',(req,res)=> {
+    var sql = $sql.allFruit.delete
+    conn.query(sql,[req.body.id],function(err,result){
+        if (err) {
+            console.log(err)
+          }
+          if (result) {
+            jsonWrite(res, result)
+          }
+    })
+})
 module.exports = router

@@ -16,7 +16,7 @@
       <el-table-column label="编号" prop="id"> </el-table-column>
       <el-table-column label="图片">
         <template slot-scope="scope">
-          <img :src="scope.row.pic" width="80" height="80" class="head_pic" />
+          <img :src="scope.row.pic" width="100" height="100" class="head_pic" />
         </template>
       </el-table-column>
       <el-table-column label="标题" prop="title"> </el-table-column>
@@ -31,7 +31,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.row.id)"
+            @click="handleDelete(scope.$index, scope.row)"
             >删除</el-button
           >
         </template>
@@ -51,58 +51,40 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'productManage',
-  data () {
+  name: "tabs",
+  data() {
     return {
       tableData: [],
-      search: '',
+      search: "",
       currentPage: 1,
       pagesize: 5
-    }
+    };
   },
   methods: {
-    getList () {
-      axios.post('/api/allFruit/list').then(res => {
-        this.tableData = res.data
-      })
+    getList() {
+      axios.post("/api/allFruit/list").then(res => {
+        this.tableData = res.data;
+      });
     },
-    handleEdit (index, row) {
-      console.log(index, row)
+    handleEdit(index, row) {
+      console.log(index, row);
     },
-    	//根据id删除用户
-    async handleDelete(id){
-        console.log(id);
-        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-        this.getList()
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
-    }, 
-    handleSizeChange (val) {
-      this.pagesize = val
+    handleDelete(index, row) {
+      console.log(index, row);
     },
-    handleCurrentChange (val) {
-      this.currentPage = val
+    handleSizeChange(val) {
+      this.pagesize = val;
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
     }
   },
-  created () {
-    this.getList()
+  created() {
+    this.getList();
   }
-}
+};
 </script>
 
 <style>

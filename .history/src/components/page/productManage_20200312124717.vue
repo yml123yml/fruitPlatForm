@@ -52,6 +52,7 @@
 
 <script>
 import axios from 'axios'
+import request from '../../utils/request'
 export default {
   name: 'productManage',
   data () {
@@ -71,27 +72,31 @@ export default {
     handleEdit (index, row) {
       console.log(index, row)
     },
-    	//根据id删除用户
-    async handleDelete(id){
-        console.log(id);
-        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+    handleDelete (id) {
+      console.log(id)
+      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
+        this.$http.post('api/allFruit/delete' + id).then(res => {
+          if (res.data.meta.status !== 200) {
+            return this.$message.error('删除用户失败')
+          }
+          this.getUserList()
+        })
         this.$message({
           type: 'success',
-          message: '删除成功!',
+          message: '删除成功!'
         })
-        this.getList()
-      }).catch((err) => {
+      }).catch(() => {
         this.$message({
-          type: 'error',
-          message: err
+          type: 'info',
+          message: '已取消删除'
         })
       })
-    }, 
+      
+    },
     handleSizeChange (val) {
       this.pagesize = val
     },

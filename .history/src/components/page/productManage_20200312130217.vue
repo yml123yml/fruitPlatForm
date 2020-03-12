@@ -52,6 +52,7 @@
 
 <script>
 import axios from 'axios'
+import request from '../../utils/request'
 export default {
   name: 'productManage',
   data () {
@@ -71,26 +72,41 @@ export default {
     handleEdit (index, row) {
       console.log(index, row)
     },
+    handleDelete(id) {
+      request({
+        url: "/api/allFruit/delete",
+        method: "post",
+        data: { id: id }
+      }).then(res => {
+        console.log(res);
+        if (res.msg === "删除成功") {
+          this.$message({
+            message: "删除成功！",
+            type: "success"
+          });
+          this.getList();
+        }
+      });
     	//根据id删除用户
-    async handleDelete(id){
-        console.log(id);
-        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-        this.getList()
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
+    // async handleDelete(id){
+    //     console.log(id);
+    //     this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     axios.delete('/api/allFruit/delete?id'+id)
+    //     this.$message({
+    //       type: 'success',
+    //       message: '删除成功!',
+    //     })
+    //     this.getList()
+    //   }).catch((err) => {
+    //     this.$message({
+    //       type: 'error',
+    //       message: err
+    //     })
+    //   })
     }, 
     handleSizeChange (val) {
       this.pagesize = val

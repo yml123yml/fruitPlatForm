@@ -20,8 +20,8 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-router.post('/searchAllFruit', (req, res) => {
-  var sql = $sql.search.searchAllFruit
+router.post('/list', (req, res) => {
+  var sql = $sql.allFruit.query
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)

@@ -20,8 +20,8 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-router.post('/allList', (req, res) => {
-  var sql = $sql.productList.allList
+router.post('/list', (req, res) => {
+  var sql = $sql.allFruit.query
   conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)
@@ -32,4 +32,19 @@ router.post('/allList', (req, res) => {
   })
 })
 
+// 删除
+router.post('/delete', (req, res) => {
+  var sql = $sql.allFruit.delete
+  // var params = req.body;
+  console.log(req)
+  conn.query(sql, [req.body.id], function (err, result) {
+    var data = result
+    console.log(result)
+    return res.send({
+      status: 1,
+      msg: '删除成功',
+      data: data
+    })
+  })
+})
 module.exports = router
