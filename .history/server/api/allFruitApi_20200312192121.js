@@ -50,7 +50,7 @@ router.get('/delete', (req, res) => {
 router.post('/addFruit',(req,res)=> {
   var sql = $sql.allFruit.addFruit
   var params = req.body
-  conn.query(sql,[params.pic,params.title,params.description,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3],function(err,result){
+  conn.query(sql,[params.pic,params.title,params.desc,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3],function(err,result){
     if(err){
       console.log(err)
     }
@@ -60,7 +60,7 @@ router.post('/addFruit',(req,res)=> {
   })
 })
 //修改
-router.post('/update',(req,res)=> {
+router.post('update',(req,res)=> {
   let id = parseInt(req.query.id)
   var sql = $sql.allFruit.update
   var params = req.body
