@@ -220,6 +220,8 @@ export default {
         .catch(_ => {});
     },
     onSubmit() {
+    //   var title = this.title
+    //   var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
         pic:this.addList.picture,
         title:this.addList.title,
@@ -239,7 +241,7 @@ export default {
     handleUpdate (id) {
       this.editFormVisible = false
       console.log(id+"我是id")
-      axios.post('/api/allFruit/update?id='+id,{
+      axios.post('/api/allFruit/updateFruit?id='+id,{
         pic:this.updateList.picture,
         title:this.updateList.title,
         description:this.updateList.description,

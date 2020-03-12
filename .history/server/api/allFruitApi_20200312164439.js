@@ -60,12 +60,10 @@ router.post('/addFruit',(req,res)=> {
   })
 })
 //修改
-router.post('update',(req,res)=> {
-  let id = parseInt(req.query.id)
+router.post('updateFruit',(req,res)=> {
   var sql = $sql.allFruit.update
   var params = req.body
-  console.log(params)
-  conn.query(sql,id,[params.pic,params.title,params.desc,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3],function(err,result){
+  conn.query(sql,[params.pic,params.title,params.desc,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3,params.id],function(err,result){
     if(err){
       console.log(err)
     }
@@ -74,4 +72,5 @@ router.post('update',(req,res)=> {
     }
   })
 })
+
 module.exports = router

@@ -220,6 +220,8 @@ export default {
         .catch(_ => {});
     },
     onSubmit() {
+    //   var title = this.title
+    //   var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
         pic:this.addList.picture,
         title:this.addList.title,

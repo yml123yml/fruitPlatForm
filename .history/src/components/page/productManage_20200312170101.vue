@@ -28,7 +28,7 @@
       <el-table-column label="价格" prop="price"> </el-table-column>
       <el-table-column label="编辑">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.row)"
+          <el-button size="mini" @click="handleEdit(scope.row.id)"
             >编辑</el-button
           >
           <el-button
@@ -127,8 +127,8 @@
           <el-input v-model="updateList.proSwipeImg3"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleUpdate(updateList.id)">更新</el-button>
-          <el-button @click="editFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleUpdate">更新</el-button>
+          <el-button @click="dialogVisible = false">取 消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -179,10 +179,10 @@ export default {
         this.tableData = res.data;
       });
     },
-    handleEdit(row) {
-      console.log('更新的id是：', row.id);
+    handleEdit(item,id) {
+      console.log('更新的id是：', id);
+      console.log(item+'ddddd')
       this.editFormVisible  = true
-      this.updateList = Object.assign({},row)
 
     },
     // 根据id删除用户
@@ -220,6 +220,8 @@ export default {
         .catch(_ => {});
     },
     onSubmit() {
+    //   var title = this.title
+    //   var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
         pic:this.addList.picture,
         title:this.addList.title,
@@ -236,23 +238,8 @@ export default {
       this.dialogVisible = false
       this.getList()
     },
-    handleUpdate (id) {
-      this.editFormVisible = false
-      console.log(id+"我是id")
-      axios.post('/api/allFruit/update?id='+id,{
-        pic:this.updateList.picture,
-        title:this.updateList.title,
-        description:this.updateList.description,
-        tip:this.updateList.tip,
-        price:this.updateList.price,
-        proDetailImg1:this.updateList.proDetailImg1,
-        proSwipeImg1:this.updateList.proSwipeImg1,
-        proSwipeImg2:this.updateList.proSwipeImg2,
-        proSwipeImg3:this.updateList.proSwipeImg3
-      }).then((response)=>{
-        console.log(response)
-      })
-      this.getList()
+    handleUpdate () {
+
     }
   },
   created() {

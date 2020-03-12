@@ -28,7 +28,7 @@
       <el-table-column label="价格" prop="price"> </el-table-column>
       <el-table-column label="编辑">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.row)"
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row.id)"
             >编辑</el-button
           >
           <el-button
@@ -97,40 +97,14 @@
    :close-on-click-modal="false"
    class="edit-form"
    :before-close="handleClose">
-    <div class="form">
-      <el-form :model="updateList" ref="form" label-width="100px" label-position="left">
-        <el-form-item label="标题">
-          <el-input v-model="updateList.title"></el-input>
+    <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+        <el-form-item label="名称" prop="Name">
+            <el-input v-model="editForm.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="图片">
-          <el-input v-model="updateList.picture"></el-input>
-        </el-form-item>
-        <el-form-item label="描述">
-          <el-input v-model="updateList.description"></el-input>
-        </el-form-item>
-        <el-form-item label="标签">
-          <el-input v-model="updateList.tip"></el-input>
-        </el-form-item>
-        <el-form-item label="价格">
-          <el-input v-model="updateList.price"></el-input>
-        </el-form-item>
-        <el-form-item label="详情图">
-          <el-input v-model="updateList.proDetailImg1"></el-input>
-        </el-form-item>
-        <el-form-item label="轮播图1">
-          <el-input v-model="updateList.proSwipeImg1"></el-input>
-        </el-form-item>
-        <el-form-item label="轮播图2">
-          <el-input v-model="updateList.proSwipeImg2"></el-input>
-        </el-form-item>
-        <el-form-item label="轮播图3">
-          <el-input v-model="updateList.proSwipeImg3"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleUpdate(updateList.id)">更新</el-button>
-          <el-button @click="editFormVisible = false">取 消</el-button>
-        </el-form-item>
-      </el-form>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click.native="handleUpdate('editForm')">更新</el-button>
     </div>
 </el-dialog>
   </div>
@@ -158,17 +132,6 @@ export default {
         proSwipeImg1: '',
         proSwipeImg2: '',
         proSwipeImg3: ''
-      },
-      updateList: {
-        picture: '',
-        title: '',
-        description: '',
-        tip: '',
-        price: '',
-        proDetailImg1: '',
-        proSwipeImg1: '',
-        proSwipeImg2: '',
-        proSwipeImg3: ''
       }
       
     };
@@ -179,11 +142,8 @@ export default {
         this.tableData = res.data;
       });
     },
-    handleEdit(row) {
-      console.log('更新的id是：', row.id);
-      this.editFormVisible  = true
-      this.updateList = Object.assign({},row)
-
+    handleEdit(index, row) {
+      console.log(index, row);
     },
     // 根据id删除用户
     async handleDelete(id){
@@ -220,6 +180,8 @@ export default {
         .catch(_ => {});
     },
     onSubmit() {
+      var title = this.title
+      var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
         pic:this.addList.picture,
         title:this.addList.title,
@@ -234,24 +196,6 @@ export default {
         console.log(response)
       })
       this.dialogVisible = false
-      this.getList()
-    },
-    handleUpdate (id) {
-      this.editFormVisible = false
-      console.log(id+"我是id")
-      axios.post('/api/allFruit/update?id='+id,{
-        pic:this.updateList.picture,
-        title:this.updateList.title,
-        description:this.updateList.description,
-        tip:this.updateList.tip,
-        price:this.updateList.price,
-        proDetailImg1:this.updateList.proDetailImg1,
-        proSwipeImg1:this.updateList.proSwipeImg1,
-        proSwipeImg2:this.updateList.proSwipeImg2,
-        proSwipeImg3:this.updateList.proSwipeImg3
-      }).then((response)=>{
-        console.log(response)
-      })
       this.getList()
     }
   },

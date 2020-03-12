@@ -60,7 +60,7 @@ router.post('/addFruit',(req,res)=> {
   })
 })
 //修改
-router.post('update',(req,res)=> {
+router.post('updateFruit',(req,res)=> {
   let id = parseInt(req.query.id)
   var sql = $sql.allFruit.update
   var params = req.body

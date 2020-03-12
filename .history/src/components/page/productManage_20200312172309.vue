@@ -127,7 +127,7 @@
           <el-input v-model="updateList.proSwipeImg3"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleUpdate(updateList.id)">更新</el-button>
+          <el-button type="primary" @click="handleUpdate(row.id)">更新</el-button>
           <el-button @click="editFormVisible = false">取 消</el-button>
         </el-form-item>
       </el-form>
@@ -220,6 +220,8 @@ export default {
         .catch(_ => {});
     },
     onSubmit() {
+    //   var title = this.title
+    //   var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
         pic:this.addList.picture,
         title:this.addList.title,
@@ -239,7 +241,7 @@ export default {
     handleUpdate (id) {
       this.editFormVisible = false
       console.log(id+"我是id")
-      axios.post('/api/allFruit/update?id='+id,{
+      axios.post('/api/allFruit/updateFruit?id='+id,{
         pic:this.updateList.picture,
         title:this.updateList.title,
         description:this.updateList.description,
