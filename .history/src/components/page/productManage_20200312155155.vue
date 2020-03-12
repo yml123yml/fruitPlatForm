@@ -167,15 +167,15 @@ export default {
       var title = this.title
       var desc = this.desc
       axios.post('/api/allFruit/addFruit',{
-        pic:this.addList.picture,
-        title:this.addList.title,
-        description:this.addList.description,
-        tip:this.addList.tip,
-        price:this.addList.price,
-        proDetailImg1:this.addList.proDetailImg1,
-        proSwipeImg1:this.addList.proSwipeImg1,
-        proSwipeImg2:this.addList.proSwipeImg2,
-        proSwipeImg3:this.addList.proSwipeImg3
+        pic:this.picture,
+        title:this.title,
+        description:this.description,
+        tip:this.tip,
+        price:this.price,
+        proDetailImg1:this.proDetailImg1,
+        proSwipeImg1:this.proSwipeImg1,
+        proSwipeImg2:this.proSwipeImg2,
+        proSwipeImg3:this.proSwipeImg3
       }).then((response)=>{
         console.log(response)
       })

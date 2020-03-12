@@ -8,7 +8,7 @@
       </el-breadcrumb>
     </div>
     <el-button type="text" @click="dialogVisible = true"
-      >添加数据</el-button
+      >点击打开 Dialog</el-button
     >
     <el-table
       :data="
@@ -23,7 +23,7 @@
         </template>
       </el-table-column>
       <el-table-column label="标题" prop="title"> </el-table-column>
-      <el-table-column label="描述" prop="description"> </el-table-column>
+      <el-table-column label="描述" prop="desc"> </el-table-column>
       <el-table-column label="标签分类" prop="tip"> </el-table-column>
       <el-table-column label="价格" prop="price"> </el-table-column>
       <el-table-column label="编辑">
@@ -59,31 +59,31 @@
      <div class="form">
       <el-form ref="form" label-width="100px" label-position="left">
         <el-form-item label="标题">
-          <el-input v-model="addList.title"></el-input>
+          <el-input v-model="title"></el-input>
         </el-form-item>
         <el-form-item label="图片">
-          <el-input v-model="addList.picture"></el-input>
+          <el-input v-model="pic"></el-input>
         </el-form-item>
         <el-form-item label="描述">
-          <el-input v-model="addList.description"></el-input>
+          <el-input v-model="desc"></el-input>
         </el-form-item>
         <el-form-item label="标签">
-          <el-input v-model="addList.tip"></el-input>
+          <el-input v-model="tip"></el-input>
         </el-form-item>
         <el-form-item label="价格">
-          <el-input v-model="addList.price"></el-input>
+          <el-input v-model="price"></el-input>
         </el-form-item>
         <el-form-item label="详情图">
-          <el-input v-model="addList.proDetailImg1"></el-input>
+          <el-input v-model="proDetailImg1"></el-input>
         </el-form-item>
         <el-form-item label="轮播图1">
-          <el-input v-model="addList.proSwipeImg1"></el-input>
+          <el-input v-model="proSwipeImg1"></el-input>
         </el-form-item>
         <el-form-item label="轮播图2">
-          <el-input v-model="addList.proSwipeImg2"></el-input>
+          <el-input v-model="proSwipeImg2"></el-input>
         </el-form-item>
         <el-form-item label="轮播图3">
-          <el-input v-model="addList.proSwipeImg3"></el-input>
+          <el-input v-model="proSwipeImg3"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -106,18 +106,15 @@ export default {
       currentPage: 1,
       pagesize: 5,
       dialogVisible: false,
-      addList: {
-        picture: '',
-        title: '',
-        description: '',
-        tip: '',
-        price: '',
-        proDetailImg1: '',
-        proSwipeImg1: '',
-        proSwipeImg2: '',
-        proSwipeImg3: ''
-      }
-      
+      pic: '',
+      title: '',
+      desc: '',
+      tip: '',
+      price: '',
+      proDetailImg1: '',
+      proSwipeImg1: '',
+      proSwipeImg2: '',
+      proSwipeImg3: ''
     };
   },
   methods: {
@@ -129,26 +126,34 @@ export default {
     handleEdit(index, row) {
       console.log(index, row);
     },
-    // 根据id删除用户
-    async handleDelete(id){
+    //根据id删除用户
+    // async handleDelete(id){
+    //     console.log(id);
+    //     this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     axios.get('/api/allFruit/delete?id='+id)
+    //     this.$message({
+    //       type: 'success',
+    //       message: '删除成功!',
+    //     })
+    //     this.getList()
+    //   }).catch((err) => {
+    //     this.$message({
+    //       type: 'error',
+    //       message: err
+    //     })
+    //   })
+    // },
+    handleDelete(id) {
+      axios.get("/api/allFruit/delete?id=" + id).then(res => {
+        console.log("dddd");
         console.log(id);
-        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        axios.get('/api/allFruit/delete?id='+id)
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-        this.getList()
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
+        console.log(res.data);
+        this.getList();
+      });
     },
     handleSizeChange(val) {
       this.pagesize = val;
@@ -166,21 +171,19 @@ export default {
     onSubmit() {
       var title = this.title
       var desc = this.desc
-      axios.post('/api/allFruit/addFruit',{
-        pic:this.addList.picture,
-        title:this.addList.title,
-        description:this.addList.description,
-        tip:this.addList.tip,
-        price:this.addList.price,
-        proDetailImg1:this.addList.proDetailImg1,
-        proSwipeImg1:this.addList.proSwipeImg1,
-        proSwipeImg2:this.addList.proSwipeImg2,
-        proSwipeImg3:this.addList.proSwipeImg3
+      axios.post('/api/allFruit/addList',{
+        title:title,
+        desc:desc,
+        pic:pic,
+        tip:tip,
+        price:price,
+        proDetailImg1:proDetailImg1,
+        proSwipeImg1:proSwipeImg1,
+        proSwipeImg2:proSwipeImg2,
+        proSwipeImg3:proSwipeImg3
       }).then((response)=>{
         console.log(response)
       })
-      this.dialogVisible = false
-      this.getList()
     }
   },
   created() {

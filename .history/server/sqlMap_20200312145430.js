@@ -6,8 +6,8 @@ var sqlMap = {
   },
   allFruit: {
     query: 'select * from allFruit',
-    delete: 'delete from allFruit where id = ?',
-    addFruit: 'insert into allFruit(pic,title,description,tip,price,proDetailImg1,proSwipeImg1,proSwipeImg2,proSwipeImg3) values(?,?,?,?,?,?,?,?,?)'
+    delete: 'delete from allFruit where id = `${id}`',
+    add: 'insert into allFruit(pic,title,desc,tip,price,proDetailImg1,) values(?,?)'
   }
 }
 

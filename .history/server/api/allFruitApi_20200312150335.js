@@ -35,11 +35,11 @@ router.post('/list', (req, res) => {
 // 删除
 router.get('/delete', (req, res) => {
   // var sql = $sql.allFruit.delete
-  let id = parseInt(req.query.id)
-  console.log(id)
-  let sql = $sql.allFruit.delete
+  const id = req.body.id
+  const sql = `delete from allFruit where id = '${id}`
   console.log(sql)
-  conn.query(sql, id, function (err, result) {
+  console.log(id)
+  conn.query(sql, function (err, result) {
     if (err) {
       console.log(err)
     }
@@ -50,8 +50,8 @@ router.get('/delete', (req, res) => {
 })
 
 // 增加
-router.post('/addFruit',(req,res)=> {
-  var sql = $sql.allFruit.addFruit
+router.post('/addList',(req,res)=> {
+  var sql = $sql.allFruit.add
   var params = req.body
   console.log('-----------我是params--------')
   console.log(params)
