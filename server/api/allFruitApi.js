@@ -47,30 +47,29 @@ router.get('/delete', (req, res) => {
 })
 
 // 增加
-router.post('/addFruit',(req,res)=> {
+router.post('/addFruit', (req, res) => {
   var sql = $sql.allFruit.addFruit
   var params = req.body
-  conn.query(sql,[params.pic,params.title,params.description,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3],function(err,result){
-    if(err){
+  conn.query(sql, [params.pic, params.title, params.description, params.tip, params.price, params.proDetailImg1, params.proSwipeImg1, params.proSwipeImg2, params.proSwipeImg3], function (err, result) {
+    if (err) {
       console.log(err)
     }
-    if(result) {
-      jsonWrite(res,result)
+    if (result) {
+      jsonWrite(res, result)
     }
   })
 })
-//修改
-router.post('/update',(req,res)=> {
+// 修改
+router.post('/update', (req, res) => {
   let id = parseInt(req.query.id)
   var sql = $sql.allFruit.update
   var params = req.body
-  console.log(params)
-  conn.query(sql,[params.pic,params.title,params.description,params.tip,params.price,params.proDetailImg1,params.proSwipeImg1,params.proSwipeImg2,params.proSwipeImg3,id],function(err,result){
-    if(err){
+  conn.query(sql, [params.title, params.description, params.tip, params.price, id], function (err, result) {
+    if (err) {
       console.log(err)
     }
-    if(result) {
-      jsonWrite(res,result)
+    if (result) {
+      jsonWrite(res, result)
     }
   })
 })

@@ -7,10 +7,10 @@
           <div class="title">悠果后台管理系统</div>
           <div>
             <el-input placeholder="请输入用户名" v-model="userName">
-              <i slot="prefix" class="iconfont">&#xe612;</i>
+              <i slot="prefix" class="el-icon-user-solid"></i>
             </el-input>
             <el-input placeholder="请输入密码" v-model="passWord" type="password">
-              <i slot="prefix" class="iconfont">&#xe694;</i>
+              <i slot="prefix" class="el-icon-lock"></i>
             </el-input>
           </div>
           <div>
@@ -25,7 +25,7 @@
 <script>
 import axios from 'axios'
 export default {
-  data: function () {
+  data () {
     return {
       userName: '',
       passWord: ''
@@ -47,7 +47,7 @@ export default {
           } else {
             localStorage.setItem('ms_username', this.userName)
             setTimeout(function () {
-              self.$router.push('/')
+              self.$router.push('/index')
             }, 1000)
           }
         })
@@ -90,9 +90,7 @@ export default {
         .el-input {
           margin: 10px;
           i {
-            display: block;
-            line-height: 40px;
-            margin-left: 5px;
+            margin: 9px 5px;
           }
         }
         .el-button {
@@ -102,5 +100,8 @@ export default {
       }
     }
   }
+  /deep/ .el-input--prefix .el-input__inner {
+    padding-left: 35px;
+}
 }
 </style>

@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "formidable": "^1.2.2",
+    "images": "^3.0.2",
     "js-cookie": "^2.2.1",
+    "multiparty": "^4.2.1",
     "mysql": "^2.18.1"
   }
 }

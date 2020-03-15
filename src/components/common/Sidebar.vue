@@ -1,52 +1,54 @@
 <template>
-    <div class="sidebar">
-        <el-menu
-            class="sidebar-el-menu"
-            :default-active="onRoutes"
-            :collapse="collapse"
-            background-color="#324157"
-            text-color="#bfcbd9"
-            active-text-color="#20a0ff"
-            unique-opened
-            router
-        >
-            <template v-for="item in items">
-                <template v-if="item.subs">
-                    <el-submenu :index="item.index" :key="item.index">
-                        <template slot="title">
-                            <i :class="item.icon"></i>
-                            <span slot="title">{{ item.title }}</span>
-                        </template>
-                        <template v-for="subItem in item.subs">
-                            <el-submenu
-                                v-if="subItem.subs"
-                                :index="subItem.index"
-                                :key="subItem.index"
-                            >
-                                <template slot="title">{{ subItem.title }}</template>
-                                <el-menu-item
-                                    v-for="(threeItem,i) in subItem.subs"
-                                    :key="i"
-                                    :index="threeItem.index"
-                                >{{ threeItem.title }}</el-menu-item>
-                            </el-submenu>
-                            <el-menu-item
-                                v-else
-                                :index="subItem.index"
-                                :key="subItem.index"
-                            >{{ subItem.title }}</el-menu-item>
-                        </template>
-                    </el-submenu>
-                </template>
-                <template v-else>
-                    <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i>
-                        <span slot="title">{{ item.title }}</span>
-                    </el-menu-item>
-                </template>
+  <div class="sidebar">
+    <el-menu
+      class="sidebar-el-menu"
+      :default-active="onRoutes"
+      :collapse="collapse"
+      background-color="#324157"
+      text-color="#fff"
+      active-text-color="#20a0ff"
+      unique-opened
+      router
+    >
+      <template v-for="item in items">
+        <template v-if="item.subs">
+          <el-submenu :index="item.index" :key="item.index">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span slot="title">{{ item.title }}</span>
             </template>
-        </el-menu>
-    </div>
+            <template v-for="subItem in item.subs">
+              <el-submenu
+                v-if="subItem.subs"
+                :index="subItem.index"
+                :key="subItem.index"
+              >
+                <template slot="title">{{ subItem.title }}</template>
+                <el-menu-item
+                  v-for="(threeItem, i) in subItem.subs"
+                  :key="i"
+                  :index="threeItem.index"
+                  >{{ threeItem.title }}</el-menu-item
+                >
+              </el-submenu>
+              <el-menu-item
+                v-else
+                :index="subItem.index"
+                :key="subItem.index"
+                >{{ subItem.title }}</el-menu-item
+              >
+            </template>
+          </el-submenu>
+        </template>
+        <template v-else>
+          <el-menu-item :index="item.index" :key="item.index">
+            <i :class="item.icon" style="color:#fff;"></i>
+            <span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+        </template>
+      </template>
+    </el-menu>
+  </div>
 </template>
 
 <script>
@@ -57,23 +59,23 @@ export default {
       collapse: false,
       items: [
         {
-          icon: 'icon-1',
+          icon: 'el-icon-s-home',
           index: 'index',
           title: '系统首页'
         },
         {
-          icon: 'icon-changyongtubiao-xianxingdaochu-zhuanqu-',
+          icon: 'el-icon-s-order',
           index: 'productList',
           title: '订单管理'
         },
         {
-          icon: 'icon-shangpinfenleiguanli',
+          icon: 'el-icon-goods',
           index: 'productManage',
           title: '商品分类管理'
         },
         {
-          icon: 'icon-shangpin-cuxiaoguanli',
-          index: '7',
+          icon: 'el-icon-sold-out',
+          index: 'hotFruitManage',
           title: '商品促销管理',
           subs: [
             {
@@ -130,20 +132,23 @@ export default {
 
 <style scoped>
 .sidebar {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 70px;
-    bottom: 0;
-    overflow-y: scroll;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 70px;
+  bottom: 0;
+  overflow-y: scroll;
 }
 .sidebar::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 .sidebar-el-menu:not(.el-menu--collapse) {
-    width: 250px;
+  width: 250px;
 }
 .sidebar > ul {
-    height: 100%;
+  height: 100%;
+}
+/deep/ .el-submenu__title i {
+    color: #fff;
 }
 </style>

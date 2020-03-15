@@ -27,39 +27,39 @@
     </div>
 </template>
 <script>
-import bus from '../common/bus';
+import bus from '../common/bus'
 export default {
-    data() {
-        return {
-            collapse: true,
-        };
-    },
-    computed: {
-        username() {
-            let username = localStorage.getItem('ms_username');
-            return username ? username : this.name;
-        }
-    },
-    methods: {
-        // 用户名下拉菜单选择事件
-        handleCommand(command) {
-            if (command == 'loginout') {
-                localStorage.removeItem('ms_username');
-                this.$router.push('/login');
-            }
-        },
-        // 侧边栏折叠
-        collapseChage() {
-            this.collapse = !this.collapse;
-            bus.$emit('collapse', this.collapse);
-        },
-    },
-    mounted() {
-        if (document.body.clientWidth < 1500) {
-            this.collapseChage();
-        }
+  data () {
+    return {
+      collapse: true
     }
-};
+  },
+  computed: {
+    username () {
+      let username = localStorage.getItem('ms_username')
+      return username || this.name
+    }
+  },
+  methods: {
+    // 用户名下拉菜单选择事件
+    handleCommand (command) {
+      if (command === 'loginout') {
+        localStorage.removeItem('ms_username')
+        this.$router.push('/login')
+      }
+    },
+    // 侧边栏折叠
+    collapseChage () {
+      this.collapse = !this.collapse
+      bus.$emit('collapse', this.collapse)
+    }
+  },
+  mounted () {
+    if (document.body.clientWidth < 1500) {
+      this.collapseChage()
+    }
+  }
+}
 </script>
 <style scoped>
 .header {
