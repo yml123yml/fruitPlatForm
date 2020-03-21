@@ -16,10 +16,10 @@
       </el-table-column>
       <el-table-column min-width="15%" align="center" label="图片">
         <template slot-scope="scope">
-          <img :src="scope.row.thumb" width="85" height="85" class="head_pic" />
+          <img :src="scope.row.pic" width="85" height="85" class="head_pic" />
         </template>
       </el-table-column>
-      <el-table-column min-width="20%" align="center" label="标题" prop="bigTitle1">
+      <el-table-column min-width="10%" align="center" label="标题" prop="title">
       </el-table-column>
       <el-table-column min-width="20%" align="center" label="名称" prop="bigTitle2">
       </el-table-column>
@@ -31,14 +31,14 @@
       >
       </el-table-column>
       <el-table-column
-        min-width="20%"
+        min-width="10%"
         align="center"
         label="价格"
         prop="price"
       >
       </el-table-column>
       <el-table-column
-        min-width="20%"
+        min-width="10%"
         align="center"
         label="数量"
         prop="num"

@@ -16,26 +16,26 @@
       </el-table-column>
       <el-table-column min-width="25%" align="center" label="图片">
         <template slot-scope="scope">
-          <img :src="scope.row.proImg" width="185" height="85" class="head_pic" />
+          <img :src="scope.row.pic" width="185" height="85" class="head_pic" />
         </template>
       </el-table-column>
-      <el-table-column min-width="20%" align="center" label="标题" prop="proName">
+      <el-table-column min-width="20%" align="center" label="标题" prop="title">
       </el-table-column>
       <el-table-column
         min-width="20%"
         align="center"
         label="描述"
-        prop="proChar"
+        prop="description"
       >
       </el-table-column>
       <el-table-column
         min-width="10%"
         align="center"
         label="现价"
-        prop="proPrice"
+        prop="price"
       >
       </el-table-column>
-      <el-table-column min-width="10%" align="center" label="原价" prop="proOldprice">
+      <el-table-column min-width="10%" align="center" label="原价" prop="oldPrice">
       </el-table-column>
       <el-table-column min-width="15%" align="center" label="编辑">
         <template slot-scope="scope">

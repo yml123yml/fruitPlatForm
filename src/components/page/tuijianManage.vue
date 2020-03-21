@@ -16,10 +16,10 @@
       </el-table-column>
       <el-table-column min-width="15%" align="center" label="图片">
         <template slot-scope="scope">
-          <img :src="scope.row.picture" width="85" height="85" class="head_pic" />
+          <img :src="scope.row.pic" width="85" height="85" class="head_pic" />
         </template>
       </el-table-column>
-      <el-table-column min-width="20%" align="center" label="标题" prop="name">
+      <el-table-column min-width="20%" align="center" label="标题" prop="title">
       </el-table-column>
       <el-table-column
         min-width="20%"
